@@ -26,6 +26,10 @@ class PassengerBogie extends Bogie {
         super(id, type);
         this.capacity = capacity;
     }
+
+    int getCapacity() {
+        return capacity;
+    }
 }
 
 class GoodsBogie extends Bogie {
@@ -56,5 +60,13 @@ public class Main {
             System.out.println("Type: " + type);
             list.forEach(b -> System.out.println("  Bogie ID: " + b.getId()));
         });
+
+        int totalSeats = bogies.stream()
+                .filter(b -> b instanceof PassengerBogie)
+                .map(b -> (PassengerBogie) b)
+                .map(PassengerBogie::getCapacity)
+                .reduce(0, Integer::sum);
+
+        System.out.println("Total Seating Capacity: " + totalSeats);
     }
 }
