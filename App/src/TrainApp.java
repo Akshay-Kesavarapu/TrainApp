@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.stream.*;
+import java.util.regex.*;
 
 abstract class Bogie {
     String id;
@@ -41,8 +42,27 @@ class GoodsBogie extends Bogie {
     }
 }
 
-public class Main {
+public class TrainApp {
+
+    static boolean isValidTrainId(String trainId) {
+        Pattern pattern = Pattern.compile("^TRN-\\d{4}$");
+        Matcher matcher = pattern.matcher(trainId);
+        return matcher.matches();
+    }
+
+    static boolean isValidCargoCode(String cargo) {
+        Pattern pattern = Pattern.compile("^[A-Z]{3,10}$");
+        Matcher matcher = pattern.matcher(cargo);
+        return matcher.matches();
+    }
+
     public static void main(String[] args) {
+
+        String trainId = "TRN-1234";
+        String cargo = "COAL";
+
+        System.out.println("Train ID valid: " + isValidTrainId(trainId));
+        System.out.println("Cargo valid: " + isValidCargoCode(cargo));
 
         List<Bogie> bogies = Arrays.asList(
                 new PassengerBogie("P1", "Sleeper", 72),
