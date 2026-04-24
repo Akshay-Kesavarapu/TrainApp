@@ -2,43 +2,38 @@ import java.util.*;
 
 public class TrainApp {
 
-    // Bubble Sort Method
-    public static void bubbleSort(int[] capacities) {
-        int n = capacities.length;
+    // Linear Search Method
+    public static boolean linearSearch(String[] bogieIds, String key) {
 
-        for (int i = 0; i < n - 1; i++) {
-            boolean swapped = false;
-
-            for (int j = 0; j < n - i - 1; j++) {
-                if (capacities[j] > capacities[j + 1]) {
-                    // Swap
-                    int temp = capacities[j];
-                    capacities[j] = capacities[j + 1];
-                    capacities[j + 1] = temp;
-
-                    swapped = true;
-                }
-            }
-
-            // Optimization: stop if already sorted
-            if (!swapped) {
-                break;
+        for (int i = 0; i < bogieIds.length; i++) {
+            if (bogieIds[i].equals(key)) {
+                return true; // Match found → early termination
             }
         }
+
+        return false; // No match found
     }
 
     public static void main(String[] args) {
 
-        // Sample passenger bogie capacities
-        int[] capacities = {72, 56, 24, 70, 60};
+        // Sample bogie IDs (unsorted)
+        String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
 
-        System.out.println("Before Sorting:");
-        System.out.println(Arrays.toString(capacities));
+        Scanner scanner = new Scanner(System.in);
 
-        // Perform Bubble Sort
-        bubbleSort(capacities);
+        System.out.print("Enter Bogie ID to search: ");
+        String searchKey = scanner.nextLine();
 
-        System.out.println("After Sorting:");
-        System.out.println(Arrays.toString(capacities));
+        // Perform Linear Search
+        boolean found = linearSearch(bogieIds, searchKey);
+
+        // Display result
+        if (found) {
+            System.out.println("Bogie ID found in the train.");
+        } else {
+            System.out.println("Bogie ID not found.");
+        }
+
+        scanner.close();
     }
 }
