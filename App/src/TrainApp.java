@@ -21,7 +21,6 @@ public class TrainApp {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter Bogie ID to search: ");
         String searchKey = scanner.nextLine();
 
         // Perform Linear Search
